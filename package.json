@@ -1,0 +1,39 @@
+{
+  "name": "party-admin-api",
+  "version": "1.0.0",
+  "description": "Party Admin Backend API with Node.js, Express, and MongoDB",
+  "main": "src/server.js",
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "nodemon src/server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "party",
+    "admin",
+    "api",
+    "express",
+    "mongodb"
+  ],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.2",
+    "mongoose": "^8.0.3",
+    "dotenv": "^16.3.1",
+    "express-validator": "^7.0.1",
+    "jsonwebtoken": "^9.0.2",
+    "express-jwt": "^8.4.1",
+    "jwks-rsa": "^3.1.0",
+    "cors": "^2.8.5",
+    "helmet": "^7.1.0",
+    "express-rate-limit": "^7.1.5",
+    "nodemailer": "^6.9.7",
+    "qrcode": "^1.5.3",
+    "nanoid": "^3.3.7",
+    "morgan": "^1.10.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.2"
+  }
+}
