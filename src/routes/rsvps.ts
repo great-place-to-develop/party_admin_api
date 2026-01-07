@@ -1,6 +1,6 @@
-const express = require('express');
+import express from 'express';
 const router = express.Router();
-const { checkJwt, attachUserId } = require('../middleware/auth');
+import { checkJwt, attachUserId } from '../middleware/auth';
 const {
   getRSVPs,
   getRSVP,
@@ -19,4 +19,4 @@ router.get('/:id', getRSVP);
 router.put('/:id', updateRSVP);
 router.delete('/:id', deleteRSVP);
 
-module.exports = router;
+export default router;

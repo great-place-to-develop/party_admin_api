@@ -43,8 +43,11 @@ bower_components
 # Compiled binary addons
 build/Release
 
-# TypeScript cache
+# TypeScript
 *.tsbuildinfo
+*.d.ts.map
+dist/
+build/
 
 # Optional npm cache directory
 .npm
@@ -71,7 +74,6 @@ out
 
 # Nuxt.js build / generate output
 .nuxt
-dist
 
 # Gatsby files
 .cache/

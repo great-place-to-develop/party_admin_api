@@ -1,18 +1,23 @@
-const nodemailer = require('nodemailer');
+import nodemailer from 'nodemailer';
+import { IInvite } from '../types';
 
 // Create reusable transporter
-const transporter = nodemailer.createTransport({
+const transporter = nodemailer.createTransporter({
   host: process.env.EMAIL_HOST,
-  port: process.env.EMAIL_PORT,
+  port: parseInt(process.env.EMAIL_PORT || '587'),
   secure: process.env.EMAIL_SECURE === 'true',
   auth: {
     user: process.env.EMAIL_USER,
-    pass: process.env.EMAIL_PASSWORD
-  }
+    pass: process.env.EMAIL_PASSWORD,
+  },
 });
 
 // Email template for invite
-const getInviteEmailTemplate = (invite, publicUrl, qrCodeDataUrl) => {
+const getInviteEmailTemplate = (
+  invite: IInvite,
+  publicUrl: string,
+  qrCodeDataUrl: string
+): string => {
   return `
     <!DOCTYPE html>
     <html>
@@ -119,31 +124,32 @@ const getInviteEmailTemplate = (invite, publicUrl, qrCodeDataUrl) => {
 };
 
 // Send invite email
-const sendInviteEmail = async (to, invite, publicUrl, qrCodeDataUrl) => {
+export const sendInviteEmail = async (
+  to: string,
+  invite: IInvite,
+  publicUrl: string,
+  qrCodeDataUrl: string
+): Promise<{ success: boolean; messageId?: string; error?: string }> => {
   try {
     const mailOptions = {
       from: process.env.EMAIL_FROM,
-      to: to,
+      to,
       subject: `You're Invited to ${invite.eventName}!`,
-      html: getInviteEmailTemplate(invite, publicUrl, qrCodeDataUrl)
+      html: getInviteEmailTemplate(invite, publicUrl, qrCodeDataUrl),
     };
 
     const info = await transporter.sendMail(mailOptions);
     return { success: true, messageId: info.messageId };
   } catch (error) {
     console.error('Error sending email:', error);
-    return { success: false, error: error.message };
+    return { success: false, error: (error as Error).message };
   }
 };
 
 // Validate email address
-const isValidEmail = (email) => {
+export const isValidEmail = (email: string): boolean => {
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   return emailRegex.test(email);
 };
 
-module.exports = {
-  sendInviteEmail,
-  isValidEmail,
-  transporter
-};
+export { transporter };

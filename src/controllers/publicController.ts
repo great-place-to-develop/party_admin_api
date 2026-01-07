@@ -1,7 +1,7 @@
-const Invite = require('../models/Invite');
-const RSVP = require('../models/RSVP');
-const ThingToKnow = require('../models/ThingToKnow');
-const { generateQRCodeBuffer } = require('../utils/qrCodeService');
+import Invite from '../models/Invite';
+import RSVP from '../models/RSVP';
+import ThingToKnow from '../models/ThingToKnow';
+import { generateQRCodeBuffer } from '../utils/qrCodeService';
 
 // GET /api/invites/public/:token - Get public invite by token
 const getPublicInvite = async (req, res) => {
@@ -191,7 +191,7 @@ const getInviteQRCode = async (req, res) => {
   }
 };
 
-module.exports = {
+export default {
   getPublicInvite,
   submitRSVP,
   getInviteQRCode

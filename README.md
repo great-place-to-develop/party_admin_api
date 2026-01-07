@@ -16,6 +16,7 @@ A comprehensive Node.js REST API for managing party invitations, RSVPs, and even
 
 ## Tech Stack
 
+- **Language**: TypeScript 5.3+
 - **Runtime**: Node.js
 - **Framework**: Express.js
 - **Database**: MongoDB with Mongoose ODM
@@ -23,6 +24,7 @@ A comprehensive Node.js REST API for managing party invitations, RSVPs, and even
 - **Email**: Nodemailer
 - **QR Codes**: QRCode library
 - **Security**: Helmet, CORS, express-rate-limit
+- **Code Quality**: ESLint + Prettier
 
 ## Prerequisites
 
@@ -83,15 +85,31 @@ EMAIL_RATE_WINDOW_HOURS=1
 
 ### Development Mode
 ```bash
+# Run with hot reload (TypeScript)
 npm run dev
+
+# Type checking without building
+npm run type-check
+
+# Lint and format code
+npm run lint
+npm run format
 ```
 
 ### Production Mode
 ```bash
+# Build TypeScript to JavaScript
+npm run build
+
+# Run production server
 npm start
 ```
 
 The API will be available at `http://localhost:3001`
+
+## Development
+
+For detailed development guidelines, TypeScript best practices, and code quality standards, see [DEVELOPMENT.md](./DEVELOPMENT.md).
 
 ## API Endpoints
 

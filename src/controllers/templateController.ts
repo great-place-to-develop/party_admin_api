@@ -1,5 +1,5 @@
-const Template = require('../models/Template');
-const User = require('../models/User');
+import Template from '../models/Template';
+import User from '../models/User';
 
 // GET /api/templates - Get templates (public + user's own)
 const getTemplates = async (req, res) => {
@@ -207,7 +207,7 @@ const deleteTemplate = async (req, res) => {
   }
 };
 
-module.exports = {
+export default {
   getTemplates,
   getTemplate,
   createTemplate,

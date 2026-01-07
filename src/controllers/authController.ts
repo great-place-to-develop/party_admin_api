@@ -1,4 +1,4 @@
-const User = require('../models/User');
+import User from '../models/User';
 
 // GET /api/auth/profile - Get or create user profile
 const getOrCreateProfile = async (req, res) => {
@@ -59,6 +59,6 @@ const getOrCreateProfile = async (req, res) => {
   }
 };
 
-module.exports = {
+export default {
   getOrCreateProfile
 };

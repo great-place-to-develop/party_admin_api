@@ -1,6 +1,6 @@
-const ThingToKnow = require('../models/ThingToKnow');
-const Invite = require('../models/Invite');
-const User = require('../models/User');
+import ThingToKnow from '../models/ThingToKnow';
+import Invite from '../models/Invite';
+import User from '../models/User';
 
 // GET /api/invites/:id/things-to-know - Get all things to know for an invite
 const getThingsToKnow = async (req, res) => {
@@ -302,7 +302,7 @@ const reorderThingsToKnow = async (req, res) => {
   }
 };
 
-module.exports = {
+export default {
   getThingsToKnow,
   getThingToKnow,
   createThingToKnow,

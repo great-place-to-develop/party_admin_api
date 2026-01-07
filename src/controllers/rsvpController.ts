@@ -1,6 +1,6 @@
-const RSVP = require('../models/RSVP');
-const Invite = require('../models/Invite');
-const User = require('../models/User');
+import RSVP from '../models/RSVP';
+import Invite from '../models/Invite';
+import User from '../models/User';
 
 // GET /api/invites/:id/rsvps - Get all RSVPs for an invite
 const getRSVPs = async (req, res) => {
@@ -182,7 +182,7 @@ const deleteRSVP = async (req, res) => {
   }
 };
 
-module.exports = {
+export default {
   getRSVPs,
   getRSVP,
   updateRSVP,

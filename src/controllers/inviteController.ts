@@ -1,9 +1,9 @@
-const Invite = require('../models/Invite');
-const RSVP = require('../models/RSVP');
-const User = require('../models/User');
-const { sendInviteEmail, isValidEmail } = require('../utils/emailService');
-const { generateQRCode } = require('../utils/qrCodeService');
-const { emailRateLimiter } = require('../middleware/rateLimiter');
+import Invite from '../models/Invite';
+import RSVP from '../models/RSVP';
+import User from '../models/User';
+import { sendInviteEmail, isValidEmail } from '../utils/emailService';
+import { generateQRCode } from '../utils/qrCodeService';
+import { emailRateLimiter } from '../middleware/rateLimiter';
 
 // GET /api/invites - Get all invites for authenticated user
 const getInvites = async (req, res) => {
@@ -380,7 +380,7 @@ const getInviteStats = async (req, res) => {
   }
 };
 
-module.exports = {
+export default {
   getInvites,
   getInvite,
   createInvite,

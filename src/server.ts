@@ -1,18 +1,18 @@
 require('dotenv').config();
-const express = require('express');
-const cors = require('cors');
-const helmet = require('helmet');
-const morgan = require('morgan');
-const connectDB = require('./config/database');
-const { apiLimiter } = require('./middleware/rateLimiter');
+import express from 'express';
+import cors from 'cors';
+import helmet from 'helmet';
+import morgan from 'morgan';
+import connectDB from './config/database';
+import { apiLimiter } from './middleware/rateLimiter';
 
 // Import routes
-const authRoutes = require('./routes/auth');
-const inviteRoutes = require('./routes/invites');
-const publicRoutes = require('./routes/public');
-const rsvpRoutes = require('./routes/rsvps');
-const thingsToKnowRoutes = require('./routes/thingsToKnow');
-const templateRoutes = require('./routes/templates');
+import authRoutes from './routes/auth';
+import inviteRoutes from './routes/invites';
+import publicRoutes from './routes/public';
+import rsvpRoutes from './routes/rsvps';
+import thingsToKnowRoutes from './routes/thingsToKnow';
+import templateRoutes from './routes/templates';
 
 // Initialize Express app
 const app = express();
@@ -111,4 +111,4 @@ app.listen(PORT, () => {
   `);
 });
 
-module.exports = app;
+export default app;

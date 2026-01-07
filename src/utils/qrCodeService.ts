@@ -1,7 +1,7 @@
-const QRCode = require('qrcode');
+import QRCode from 'qrcode';
 
 // Generate QR code as data URL
-const generateQRCode = async (url) => {
+export const generateQRCode = async (url: string): Promise<string> => {
   try {
     const qrCodeDataUrl = await QRCode.toDataURL(url, {
       errorCorrectionLevel: 'H',
@@ -11,8 +11,8 @@ const generateQRCode = async (url) => {
       width: 300,
       color: {
         dark: '#000000',
-        light: '#FFFFFF'
-      }
+        light: '#FFFFFF',
+      },
     });
     return qrCodeDataUrl;
   } catch (error) {
@@ -22,23 +22,18 @@ const generateQRCode = async (url) => {
 };
 
 // Generate QR code as buffer
-const generateQRCodeBuffer = async (url) => {
+export const generateQRCodeBuffer = async (url: string): Promise<Buffer> => {
   try {
     const buffer = await QRCode.toBuffer(url, {
       errorCorrectionLevel: 'H',
       type: 'png',
       quality: 0.92,
       margin: 1,
-      width: 300
+      width: 300,
     });
     return buffer;
   } catch (error) {
     console.error('Error generating QR code buffer:', error);
     throw error;
   }
-};
-
-module.exports = {
-  generateQRCode,
-  generateQRCodeBuffer
 };
