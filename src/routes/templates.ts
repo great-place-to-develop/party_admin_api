@@ -1,13 +1,15 @@
 import express from 'express';
 const router = express.Router();
 import { checkJwt, attachUserId } from '../middleware/auth';
+import templateController from '../controllers/templateController';
+
 const {
   getTemplates,
   getTemplate,
   createTemplate,
   updateTemplate,
   deleteTemplate
-} = require('../controllers/templateController');
+} = templateController;
 
 // All routes require authentication
 router.use(checkJwt, attachUserId);

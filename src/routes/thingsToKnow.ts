@@ -1,6 +1,8 @@
 import express from 'express';
 const router = express.Router();
 import { checkJwt, attachUserId } from '../middleware/auth';
+import thingToKnowController from '../controllers/thingToKnowController';
+
 const {
   getThingsToKnow,
   getThingToKnow,
@@ -8,7 +10,7 @@ const {
   updateThingToKnow,
   deleteThingToKnow,
   reorderThingsToKnow
-} = require('../controllers/thingToKnowController');
+} = thingToKnowController;
 
 // All routes require authentication
 router.use(checkJwt, attachUserId);
