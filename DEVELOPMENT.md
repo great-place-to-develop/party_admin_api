@@ -26,6 +26,30 @@ mongodb >= 4.4.0
 
 ### Installation
 
+#### Option 1: Docker Development Environment (Recommended)
+
+```bash
+# Start development environment with hot-reload
+docker-compose -f docker-compose.dev.yml up -d
+
+# View logs
+docker-compose -f docker-compose.dev.yml logs -f api-dev
+
+# Access MongoDB Express UI
+open http://localhost:8081  # admin/admin
+
+# Stop environment
+docker-compose -f docker-compose.dev.yml down
+```
+
+**Benefits:**
+- No need to install Node.js, MongoDB locally
+- Consistent development environment across team
+- Hot-reload with source code mounted
+- MongoDB Express UI included
+
+#### Option 2: Local Installation
+
 ```bash
 # Install dependencies
 npm install
@@ -467,6 +491,76 @@ Create `.vscode/launch.json`:
 - Use VS Code breakpoints for step-through debugging
 - Check MongoDB logs for database issues
 - Use Morgan for HTTP request logging
+
+## Docker Development
+
+### Running with Docker
+
+**Development mode with hot-reload:**
+
+```bash
+# Start development environment
+docker-compose -f docker-compose.dev.yml up -d
+
+# View logs
+docker-compose -f docker-compose.dev.yml logs -f api-dev
+
+# Execute commands in container
+docker-compose -f docker-compose.dev.yml exec api-dev npm run lint
+
+# Access container shell
+docker-compose -f docker-compose.dev.yml exec api-dev sh
+
+# Stop environment
+docker-compose -f docker-compose.dev.yml down
+```
+
+**Production mode:**
+
+```bash
+# Build and start
+docker-compose up -d
+
+# View logs
+docker-compose logs -f api
+
+# Stop
+docker-compose down
+```
+
+### Docker Development Workflow
+
+1. **Make code changes** - Source code is mounted, changes trigger reload
+2. **Check logs** - `docker-compose logs -f api-dev`
+3. **Run linting** - `docker-compose exec api-dev npm run lint:fix`
+4. **Test changes** - Access API at http://localhost:3001
+5. **Check MongoDB** - Use Mongo Express at http://localhost:8081
+
+### Debugging Docker Container
+
+```bash
+# View environment variables
+docker-compose exec api-dev env
+
+# Check file system
+docker-compose exec api-dev ls -la /app
+
+# Test MongoDB connection
+docker-compose exec api-dev node -e "require('mongoose').connect(process.env.MONGODB_URI).then(() => console.log('Connected'))"
+
+# View running processes
+docker-compose exec api-dev ps aux
+```
+
+### Docker Best Practices
+
+- **Layer caching**: Modify package.json only when adding dependencies
+- **Multi-stage builds**: Keep production images small
+- **Health checks**: Monitor container health status
+- **Non-root user**: Containers run as unprivileged user
+- **Resource limits**: Set memory and CPU limits in production
+
+For comprehensive Docker documentation, see [DOCKER.md](./DOCKER.md).
 
 ## Deployment
 

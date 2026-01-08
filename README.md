@@ -28,10 +28,39 @@ A comprehensive Node.js REST API for managing party invitations, RSVPs, and even
 
 ## Prerequisites
 
+### Option 1: Docker (Recommended)
+- Docker Desktop or Docker Engine (v20.10+)
+- Docker Compose (v2.0+)
+
+### Option 2: Local Development
 - Node.js (v14 or higher)
 - MongoDB (v4.4 or higher)
 - Auth0 account
 - Email service (Gmail, SendGrid, etc.)
+
+## Quick Start with Docker
+
+The fastest way to get started:
+
+```bash
+# Clone the repository
+git clone <repository-url>
+cd party_admin_api
+
+# Copy and configure environment
+cp .env.example .env
+# Edit .env with your Auth0 and email credentials
+
+# Start with Docker Compose (includes MongoDB)
+docker-compose up -d
+
+# View logs
+docker-compose logs -f api
+
+# API is now running at http://localhost:3001
+```
+
+For detailed Docker instructions, see [DOCKER.md](./DOCKER.md).
 
 ## Installation
 
