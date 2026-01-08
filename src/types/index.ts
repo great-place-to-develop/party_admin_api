@@ -1,16 +1,4 @@
-import { Request } from 'express';
 import { Document, Types } from 'mongoose';
-
-// Extend Express Request to include auth and userId
-export interface AuthRequest extends Request {
-  auth?: {
-    sub: string;
-    email?: string;
-    name?: string;
-    picture?: string;
-  };
-  userId?: string;
-}
 
 // User Document Interface
 export interface IUser extends Document {

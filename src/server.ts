@@ -76,7 +76,7 @@ app.use((err, req, res, next) => {
     return res.status(400).json({
       success: false,
       message: 'Validation error',
-      errors: Object.values(err.errors).map(e => e.message)
+      errors: Object.values(err.errors).map((e: any) => e.message)
     });
   }
 

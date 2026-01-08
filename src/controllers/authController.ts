@@ -1,8 +1,17 @@
+import { Request, Response } from 'express';
 import User from '../models/User';
 
 // GET /api/auth/profile - Get or create user profile
-const getOrCreateProfile = async (req, res) => {
+export const getOrCreateProfile = async (req: Request, res: Response): Promise<void> => {
   try {
+    if (!req.auth) {
+      res.status(401).json({
+        success: false,
+        message: 'Authentication required'
+      });
+      return;
+    }
+
     const { sub: auth0Id, email, name, picture } = req.auth;
 
     // Try to find existing user
@@ -54,11 +63,7 @@ const getOrCreateProfile = async (req, res) => {
     res.status(500).json({
       success: false,
       message: 'Error retrieving or creating user profile',
-      error: error.message
+      error: error instanceof Error ? error.message : 'Unknown error'
     });
   }
-};
-
-export default {
-  getOrCreateProfile
 };

@@ -1,7 +1,6 @@
 import { expressjwt as jwt } from 'express-jwt';
 import jwksRsa from 'jwks-rsa';
-import { Response, NextFunction } from 'express';
-import { AuthRequest } from '../types';
+import { Request, Response, NextFunction } from 'express';
 
 // Auth0 JWT validation middleware
 export const checkJwt = jwt({
@@ -17,7 +16,7 @@ export const checkJwt = jwt({
 });
 
 // Middleware to attach user ID from Auth0 sub claim
-export const attachUserId = (req: AuthRequest, res: Response, next: NextFunction): void => {
+export const attachUserId = (req: Request, res: Response, next: NextFunction): void => {
   if (req.auth && req.auth.sub) {
     req.userId = req.auth.sub;
   }

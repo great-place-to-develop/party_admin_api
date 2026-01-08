@@ -1,10 +1,11 @@
+import { Request, Response } from 'express';
 import Invite from '../models/Invite';
 import RSVP from '../models/RSVP';
 import ThingToKnow from '../models/ThingToKnow';
 import { generateQRCodeBuffer } from '../utils/qrCodeService';
 
 // GET /api/invites/public/:token - Get public invite by token
-const getPublicInvite = async (req, res) => {
+export const getPublicInvite = async (req: Request, res: Response): Promise<void> => {
   try {
     const { token } = req.params;
     const visitorId = req.headers['x-visitor-id'] || req.ip;
@@ -53,13 +54,13 @@ const getPublicInvite = async (req, res) => {
     res.status(500).json({
       success: false,
       message: 'Error retrieving invite',
-      error: error.message
+      error: error instanceof Error ? error.message : 'Unknown error'
     });
   }
 };
 
 // POST /api/invites/public/:token/rsvp - Submit RSVP
-const submitRSVP = async (req, res) => {
+export const submitRSVP = async (req: Request, res: Response): Promise<void> => {
   try {
     const { token } = req.params;
     const {
@@ -158,13 +159,13 @@ const submitRSVP = async (req, res) => {
     res.status(500).json({
       success: false,
       message: 'Error submitting RSVP',
-      error: error.message
+      error: error instanceof Error ? error.message : 'Unknown error'
     });
   }
 };
 
 // GET /api/invites/:id/qr - Generate QR code for invite
-const getInviteQRCode = async (req, res) => {
+export const getInviteQRCode = async (req: Request, res: Response): Promise<void> => {
   try {
     const invite = await Invite.findById(req.params.id);
 
@@ -186,13 +187,7 @@ const getInviteQRCode = async (req, res) => {
     res.status(500).json({
       success: false,
       message: 'Error generating QR code',
-      error: error.message
+      error: error instanceof Error ? error.message : 'Unknown error'
     });
   }
-};
-
-export default {
-  getPublicInvite,
-  submitRSVP,
-  getInviteQRCode
 };

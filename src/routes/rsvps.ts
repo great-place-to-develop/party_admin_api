@@ -1,12 +1,14 @@
 import express from 'express';
 const router = express.Router();
 import { checkJwt, attachUserId } from '../middleware/auth';
+import rsvpController from '../controllers/rsvpController';
+
 const {
   getRSVPs,
   getRSVP,
   updateRSVP,
   deleteRSVP
-} = require('../controllers/rsvpController');
+} = rsvpController;
 
 // All routes require authentication
 router.use(checkJwt, attachUserId);

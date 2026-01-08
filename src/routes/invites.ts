@@ -1,6 +1,8 @@
 import express from 'express';
 const router = express.Router();
 import { checkJwt, attachUserId } from '../middleware/auth';
+import inviteController from '../controllers/inviteController';
+
 const {
   getInvites,
   getInvite,
@@ -9,7 +11,7 @@ const {
   deleteInvite,
   sendInvite,
   getInviteStats
-} = require('../controllers/inviteController');
+} = inviteController;
 
 // All routes require authentication
 router.use(checkJwt, attachUserId);
